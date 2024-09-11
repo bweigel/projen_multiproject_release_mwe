@@ -5,6 +5,7 @@ const project = new monorepo.MonorepoTsProject({
   devDeps: ["@aws/pdk"],
   name: "projen_multiproject_release_mwe",
   projenrcTs: true,
+  github: true,
 });
 
 new AwsCdkConstructLibrary({

@@ -3,6 +3,7 @@
 !/.projen/tasks.json
 !/.projen/deps.json
 !/.projen/files.json
+!/.github/workflows/pull-request-lint.yml
 !/package.json
 !/.npmignore
 logs
@@ -29,6 +30,10 @@ jspm_packages/
 .yarn-integrity
 .cache
 .tmp
+!/.github/workflows/build.yml
+!/.mergify.yml
+!/.github/workflows/upgrade.yml
+!/.github/pull_request_template.md
 !/.prettierignore
 !/.prettierrc.json
 !/test/
@@ -42,6 +47,8 @@ jspm_packages/
 !.nx/plugins
 !/nx.json
 !/.nxignore
+!/.github/workflows/release_package_a.yml
+!/.github/workflows/release_package_b.yml
 !/.syncpackrc.json
 !/.projenrc.ts
 !/LICENSE
