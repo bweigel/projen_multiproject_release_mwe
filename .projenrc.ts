@@ -20,6 +20,7 @@ const defaultOptions = {
   authorAddress: "email@mail.com",
   workflowNodeVersion: "20",
   repositoryUrl: "https://repository.url",
+  npmRegistryUrl: 'https://npm.pkg.github.com',
   release: true,
 }
 
@@ -27,6 +28,7 @@ new AwsCdkConstructLibrary({
   parent: project,
   name: "package_a",
   outdir: "packages/package_a",
+  packageName: `@bweigel/cdk-package_a`,
   ...defaultOptions
 });
 
@@ -35,6 +37,7 @@ new AwsCdkConstructLibrary({
   parent: project,
   name: "package_b",
   outdir: "packages/package_b",
+  packageName: `@bweigel/cdk-package_b`,
   ...defaultOptions
 });
 

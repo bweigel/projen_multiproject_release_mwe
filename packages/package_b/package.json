@@ -1,5 +1,5 @@
 {
-  "name": "package_b",
+  "name": "@bweigel/cdk-package_b",
   "repository": {
     "type": "git",
     "url": "https://repository.url"
@@ -65,7 +65,7 @@
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com/"
   },
   "version": "0.0.0",
   "jest": {
