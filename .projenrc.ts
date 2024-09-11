@@ -7,6 +7,10 @@ const project = new monorepo.MonorepoTsProject({
   projenrcTs: true,
   github: true,
 });
+project.addTask('package:js', {
+  exec: 'npx nx run-many --target=package:js --output-style=stream --nx-bail',
+});
+
 
 const defaultOptions = {
   defaultReleaseBranch: "main",

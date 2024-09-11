@@ -125,6 +125,14 @@
         }
       ]
     },
+    "package:js": {
+      "name": "package:js",
+      "steps": [
+        {
+          "exec": "npx nx run-many --target=package:js --output-style=stream --nx-bail"
+        }
+      ]
+    },
     "post-compile": {
       "name": "post-compile",
       "description": "Runs after successful compilation for all affected projects",
