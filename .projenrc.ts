@@ -8,29 +8,29 @@ const project = new monorepo.MonorepoTsProject({
   github: true,
 });
 
-new AwsCdkConstructLibrary({
-  parent: project,
+const defaultOptions = {
+  defaultReleaseBranch: "main",
+  cdkVersion: "2.157.0",
   author: "author",
   authorAddress: "email@mail.com",
-  cdkVersion: "2.157.0",
-  defaultReleaseBranch: "main",
-  name: "package_a",
-  release: true,
+  workflowNodeVersion: "20",
   repositoryUrl: "https://repository.url",
+  release: true,
+}
+
+new AwsCdkConstructLibrary({
+  parent: project,
+  name: "package_a",
   outdir: "packages/package_a",
+  ...defaultOptions
 });
 
 
 new AwsCdkConstructLibrary({
   parent: project,
-  author: "author",
-  authorAddress: "email@mail.com",
-  cdkVersion: "2.157.0",
-  defaultReleaseBranch: "main",
   name: "package_b",
-  release: true,
-  repositoryUrl: "https://repository.url",
   outdir: "packages/package_b",
+  ...defaultOptions
 });
 
 project.synth();
