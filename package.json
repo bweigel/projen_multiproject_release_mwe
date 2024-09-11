@@ -35,7 +35,7 @@
     "npm-check-updates": "^17.1.1",
     "nx": "19.0.0",
     "prettier": "^3.3.3",
-    "projen": "^0.82.8",
+    "projen": "0.87.2",
     "syncpack": "^12",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"

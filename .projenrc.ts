@@ -4,6 +4,7 @@ import { AwsCdkConstructLibrary } from "projen/lib/awscdk";
 const project = new monorepo.MonorepoTsProject({
   devDeps: ["@aws/pdk"],
   name: "projen_multiproject_release_mwe",
+  projenVersion: "0.87.2",
   projenrcTs: true,
   github: true,
 });
