@@ -1,5 +1,7 @@
 import { monorepo } from "@aws/pdk";
+import { JsonPatch } from "projen";
 import { AwsCdkConstructLibrary } from "projen/lib/awscdk";
+import { GithubWorkflow } from "projen/lib/github";
 
 const project = new monorepo.MonorepoTsProject({
   devDeps: ["@aws/pdk"],
@@ -24,6 +26,40 @@ const defaultOptions = {
   release: true,
 }
 
+export function patchReleaseWorkflow(workflow?: GithubWorkflow) {
+  workflow?.file?.patch(JsonPatch.replace(`/jobs/release_npm/steps`, [
+    {
+      uses: "actions/setup-node@v4",
+      with: {
+        "node-version": "20"
+      }
+    },
+    {
+      name: "Download build artifacts",
+      uses: "actions/download-artifact@v4",
+      with: {
+        name: "build-artifact",
+        path: "dist"
+      },
+    },
+    {
+      name: "Restore build artifact permissions",
+      run: "cd dist && setfacl --restore=permissions-backup.acl",
+      "continue-on-error": true
+    },
+    {
+      name: "Release",
+      env: {
+        NPM_DIST_TAG: "latest",
+        NPM_REGISTRY: "npm.pkg.github.com",
+        NPM_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      },
+      run: "npx -p publib@latest publib-npm"
+
+    }
+  ]));
+}
+
 new AwsCdkConstructLibrary({
   parent: project,
   name: "package_a",
@@ -31,7 +67,6 @@ new AwsCdkConstructLibrary({
   packageName: `@bweigel/cdk-package_a`,
   ...defaultOptions
 });
-
 
 new AwsCdkConstructLibrary({
   parent: project,
@@ -41,4 +76,6 @@ new AwsCdkConstructLibrary({
   ...defaultOptions
 });
 
+patchReleaseWorkflow(project.github?.tryFindWorkflow('release_package_a'));
+patchReleaseWorkflow(project.github?.tryFindWorkflow('release_package_b'));
 project.synth();
